@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PricePilot</title>
+    <meta name="description" content="Dropshipper Price Optimizer — Maximize your margin based on historical sales data.">
+    <link rel="icon" type="image/png" href="PricePilot.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css?v=records-dropdown-1">
+</head>
+<body class="app-page">
+    <div class="grain-overlay"></div>
+
+    <div class="app-container">
+        <header class="main-header">
+            <div class="app-header-top">
+                <div class="app-title-block">
+                    <h1>Price <span class="display">Optimizer</span></h1>
+                </div>
+                <div class="header-actions">
+                    <a class="btn-link" href="hub.html">&#8592; Back to products</a>
+                </div>
+            </div>
+            <p class="subtitle" id="product-subtitle">Data-driven margin maximization for dropshippers</p>
+        </header>
+
+        <!-- Metrics strip -->
+        <section class="metrics-strip glass-panel">
+            <div class="metric-cell">
+                <div class="metric-title">Avg selling price</div>
+                <div class="metric-value" id="metric-avg-price">$0</div>
+            </div>
+            <div class="metric-cell">
+                <div class="metric-title">Avg daily units</div>
+                <div class="metric-value" id="metric-avg-demand">0</div>
+            </div>
+            <div class="metric-cell">
+                <div class="metric-title">Avg unit cost</div>
+                <div class="metric-value" id="metric-avg-cost">$0</div>
+            </div>
+            <div class="metric-cell highlight-metric">
+                <div class="metric-title">Avg daily profit</div>
+                <div class="metric-value" id="metric-avg-profit">$0</div>
+            </div>
+        </section>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- Charts -->
+        <div class="charts-container glass-panel">
+            <div class="chart-header">
+                <h2>Market insights</h2>
+                <div class="chart-tabs">
+                    <button class="tab-btn active" data-target="demand-chart-container">Demand</button>
+                    <button class="tab-btn" data-target="profit-chart-container">Profit</button>
+                    <button class="tab-btn" data-target="cost-chart-container">Trends</button>
+                </div>
+            </div>
+            <div class="chart-wrapper active" id="demand-chart-container">
+                <canvas id="demandChart"></canvas>
+                <p class="chart-caption">Price vs units sold &mdash; your demand curve</p>
+            </div>
+            <div class="chart-wrapper hide" id="profit-chart-container">
+                <canvas id="profitChart"></canvas>
+                <p class="chart-caption">Simulated profit across candidate price points</p>
+            </div>
+            <div class="chart-wrapper hide" id="cost-chart-container">
+                <canvas id="trendsChart"></canvas>
+                <p class="chart-caption">Historical metrics over time</p>
+            </div>
+        </div>
+
+        <div class="section-divider" aria-hidden="true"></div>
+
+        <!-- Main layout -->
+        <div class="content-layout">
+            <div class="left-column">
+                <div class="glass-panel recommendation-panel" id="recommendation-panel">
+                    <h2>Recommendation</h2>
+                    <div class="needs-data-msg" id="needs-data-msg">
+                        <p>Requires at least 3 entries with varied average selling prices and 15+ total units sold to generate a recommendation. If you didn’t run ads (or traffic was abnormal), don’t log that day.</p>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="data-progress" style="width:0%"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">0 / 3 entries logged</span>
+                    </div>
+
+                    <div class="optimal-result hide" id="optimal-result">
+                        <div class="rec-price-label">Recommended strategy</div>
+                        <div class="rec-price-value" id="rec-optimal-price">Recommended price: $--</div>
+                        <div class="rec-insight" id="rec-insight">
+                            <span class="insight-badge" id="insight-badge">--</span>
+                            <span class="insight-text" id="insight-text">Analyzing elasticity&hellip;</span>
+                        </div>
+                        <div class="model-equation" id="model-equation">Demand Model: Q = aP&sup2; + bP + c</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel form-panel">
+	                    <h2>Log sales data</h2>
+		                    <p class="form-desc">Enter totals for each batch to sharpen your recommendation.</p>
+		                    <form id="daily-data-form">
+		                        <div class="input-group">
+		                            <label for="revenue-input">Total revenue ($)</label>
+			                            <input type="number" id="revenue-input" step="1" min="0" placeholder="e.g. 900" required>
+		                        </div>
+		                        <div class="input-group">
+		                            <label for="cost-input">Total fulfillment cost ($)</label>
+		                            <input type="number" id="cost-input" step="1" min="0" placeholder="e.g. 600" required>
+		                        </div>
+		                        <div class="input-group">
+		                            <label for="quantity-input">Quantity sold</label>
+		                            <input type="number" id="quantity-input" min="1" step="1" placeholder="e.g. 20" required>
+		                        </div>
+		                        <button type="submit" class="btn-primary btn-acid">
+		                            Add record
+		                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+		                        </button>
+	                    </form>
+                </div>
+
+                <div class="glass-panel actions-panel">
+                    <button id="clear-data-btn" class="btn-danger">Clear all data</button>
+                </div>
+            </div>
+
+            <div class="right-column">
+                <div class="table-container glass-panel">
+                    <div class="table-header">
+                        <h2>Historical records</h2>
+                        <span class="record-count" id="record-count">0 entries</span>
+                    </div>
+                    <div class="records-picker" id="records-picker">
+                        <label for="record-select">Select entry</label>
+                        <select id="record-select" aria-label="Select historical record"></select>
+                        <div class="record-detail-grid" id="record-detail-grid">
+                            <p class="record-detail-empty">No data yet &mdash; add your first batch above</p>
+                        </div>
+                    </div>
+                    <div class="table-scroll">
+                        <table id="records-table">
+                            <thead>
+	                                <tr>
+	                                    <th>#</th>
+	                                    <th>Revenue</th>
+	                                    <th>Cost</th>
+	                                    <th>Quantity</th>
+	                                    <th>Avg price</th>
+	                                    <th>Unit cost</th>
+	                                    <th>Profit</th>
+	                                    <th>Actions</th>
+	                                </tr>
+                            </thead>
+                            <tbody id="table-body">
+                                <tr class="empty-row" id="empty-row-msg">
+                                    <td colspan="8">No data yet &mdash; add your first batch above</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="clear-data-modal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="clear-modal-title">
+            <div class="modal-header">
+                <h2 id="clear-modal-title">Clear all data</h2>
+                <button class="modal-close" type="button" aria-label="Close" id="clear-modal-close">&times;</button>
+            </div>
+            <p class="modal-subtitle">Are you sure? This removes every historical entry for this product. It can't be undone.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-link" id="cancel-clear-btn">Cancel</button>
+                <button type="button" class="btn-danger" id="confirm-clear-btn" style="flex:initial;padding:11px 22px;">Yes, clear data</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="app.js?v=records-dropdown-1"></script>
+</body>
+</html>

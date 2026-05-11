@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PricePilot</title>
+    <link rel="icon" type="image/png" href="PricePilot.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="hub-page">
+    <div class="grain-overlay"></div>
+
+    <nav class="site-nav dark-mode-nav" id="site-nav">
+        <a class="nav-brand" href="index.html">PricePilot</a>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-right-group">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="hub.html">Products</a>
+            </div>
+            <div class="nav-actions" id="nav-actions">
+                <a class="btn-link nav-login" href="login.html">Log in</a>
+                <a class="nav-cta nav-signup" href="login.html">Get started <span class="btn-arrow">&#8594;</span></a>
+                <button class="btn-link nav-logout" id="logout-btn" type="button">Log out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content-shell">
+        <main class="hub-shell">
+            <header class="hub-header">
+                <div>
+                    <span class="hub-kicker">Your workspace</span>
+                    <h1 class="hub-title"><span class="display">Your</span> products</h1>
+                    <p class="hub-subtitle">Each product has its own data history and price recommendation. Create one per SKU for the cleanest results.</p>
+                </div>
+            </header>
+            <section class="product-grid" id="product-grid">
+                <button class="glass-panel product-card product-add" id="add-product-btn" type="button">
+                    <span class="add-plus">+</span>
+                    <span class="add-text">New product</span>
+                </button>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="product-modal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+            <div class="modal-header">
+                <h2 id="product-modal-title">New product</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <p class="modal-subtitle">Give it a short, clear name. One per SKU works best.</p>
+            <form id="product-form">
+                <label for="product-name-input">Product name</label>
+                <input id="product-name-input" type="text" maxlength="40" placeholder="e.g. Blue hoodie" required>
+                <div class="modal-actions">
+                    <button type="button" class="btn-link" id="cancel-product-btn">Cancel</button>
+                    <button type="submit" class="btn-primary btn-acid" style="width:auto;padding:11px 22px;">Create <span class="btn-arrow">&#8594;</span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="delete-modal" aria-hidden="true">
+        <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+            <div class="modal-header">
+                <h2 id="delete-modal-title">Delete product</h2>
+                <button class="modal-close" type="button" aria-label="Close">&times;</button>
+            </div>
+            <p class="modal-subtitle" id="delete-modal-text">This will delete the product and all its data. Can't be undone.</p>
+            <div class="modal-actions">
+                <button type="button" class="btn-link" id="cancel-delete-btn">Cancel</button>
+                <button type="button" class="btn-danger" id="confirm-delete-btn" style="flex:initial;padding:11px 22px;">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand-col">
+                <div class="footer-brand">PricePilot</div>
+                <p>Data-driven pricing intelligence for dropshippers. No guesswork, no spreadsheets &mdash; just better margins.</p>
+                <a class="btn-primary btn-acid" style="width:auto;padding:11px 22px;font-size:0.88rem;" href="login.html">Get started <span class="btn-arrow">&#8594;</span></a>
+            </div>
+            <div class="footer-col">
+                <h5>Product</h5>
+                <a href="#how-it-works">How it works</a>
+                <a href="#algorithm">The math</a>
+                <a href="#faq">FAQ</a>
+                <a href="login.html">Get started</a>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="copyright">&copy; 2026 PricePilot. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script type="module" src="./nav-auth.js"></script>
+    <script type="module">
+        import { auth, db } from './firebase.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import {
+            collection,
+            addDoc,
+            deleteDoc,
+            doc,
+            getDocs,
+            orderBy,
+            query,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const nav = document.getElementById('site-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        }, { passive: true });
+
+        const menuBtn = document.getElementById('mobile-menu-toggle');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', () => {
+                document.body.classList.toggle('menu-open');
+                const open = document.body.classList.contains('menu-open');
+                menuBtn.innerHTML = open
+                    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+                    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+            });
+        }
+
+        const productGrid = document.getElementById('product-grid');
+        const addBtn = document.getElementById('add-product-btn');
+
+        const modal       = document.getElementById('product-modal');
+        const modalClose  = modal.querySelector('.modal-close');
+        const modalCancel = document.getElementById('cancel-product-btn');
+        const productForm = document.getElementById('product-form');
+        const nameInput   = document.getElementById('product-name-input');
+        const deleteModal   = document.getElementById('delete-modal');
+        const deleteClose   = deleteModal.querySelector('.modal-close');
+        const deleteCancel  = document.getElementById('cancel-delete-btn');
+        const deleteConfirm = document.getElementById('confirm-delete-btn');
+        const deleteText    = document.getElementById('delete-modal-text');
+        let pendingDelete = null;
+
+        const openModal  = () => { modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); nameInput.value=''; setTimeout(()=>nameInput.focus(),50); };
+        const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); };
+        const openDeleteModal = (p) => { pendingDelete=p; deleteText.textContent=`Delete "${p.name}"? All its data will be lost.`; deleteModal.classList.add('open'); deleteModal.setAttribute('aria-hidden','false'); deleteCancel.focus(); };
+        const closeDeleteModal = () => { deleteModal.classList.remove('open'); deleteModal.setAttribute('aria-hidden','true'); pendingDelete=null; };
+
+        addBtn.addEventListener('click', openModal);
+        modalClose.addEventListener('click', closeModal);
+        modalCancel.addEventListener('click', closeModal);
+        modal.addEventListener('click', e => { if(e.target===modal) closeModal(); });
+        deleteClose.addEventListener('click', closeDeleteModal);
+        deleteCancel.addEventListener('click', closeDeleteModal);
+        deleteModal.addEventListener('click', e => { if(e.target===deleteModal) closeDeleteModal(); });
+        document.addEventListener('keydown', e => {
+            if(e.key==='Escape') { if(modal.classList.contains('open')) closeModal(); if(deleteModal.classList.contains('open')) closeDeleteModal(); }
+        });
+
+        async function deleteProductData(uid, productId) {
+            const recordsCol = collection(db, 'users', uid, 'products', productId, 'records');
+            const snap = await getDocs(recordsCol);
+            for (const d of snap.docs) {
+                await deleteDoc(d.ref);
+            }
+            await deleteDoc(doc(db, 'users', uid, 'products', productId));
+        }
+
+        function formatCreatedAt(createdAt) {
+            const dt = createdAt && createdAt.toDate ? createdAt.toDate() : (createdAt ? new Date(createdAt) : null);
+            return dt ? dt.toLocaleDateString() : '—';
+        }
+
+        async function renderProducts(uid) {
+            productGrid.querySelectorAll('.product-card[data-id]').forEach(c => c.remove());
+            const productsCol = collection(db, 'users', uid, 'products');
+            const q = query(productsCol, orderBy('createdAt', 'desc'));
+            const snap = await getDocs(q);
+
+            snap.forEach(docSnap => {
+                const product = { id: docSnap.id, ...docSnap.data() };
+                const card = document.createElement('div');
+                card.className = 'glass-panel product-card';
+                card.dataset.id = product.id;
+                card.innerHTML = `
+                    <div class="product-name">${product.name || 'Untitled'}</div>
+                    <div class="product-meta">Created ${formatCreatedAt(product.createdAt)}</div>
+                    <div class="product-actions">
+                        <button class="btn-primary btn-acid product-open" style="width:auto;padding:9px 18px;font-size:0.82rem;" type="button">Open →</button>
+                        <button class="btn-link product-delete" style="font-size:0.78rem;color:var(--danger);border-color:transparent;padding:6px 12px;" type="button">Delete</button>
+                    </div>`;
+                card.querySelector('.product-open').addEventListener('click', () => {
+                    window.location.href = `app.html?product=${encodeURIComponent(product.id)}`;
+                });
+                card.querySelector('.product-delete').addEventListener('click', () => openDeleteModal(product));
+                productGrid.appendChild(card);
+            });
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            productForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = nameInput.value.trim();
+                if (!name) return;
+                await addDoc(collection(db, 'users', user.uid, 'products'), {
+                    name,
+                    createdAt: serverTimestamp()
+                });
+                closeModal();
+                await renderProducts(user.uid);
+            });
+
+            deleteConfirm.addEventListener('click', async () => {
+                if (!pendingDelete) return;
+                const productId = pendingDelete.id;
+                closeDeleteModal();
+                await deleteProductData(user.uid, productId);
+                await renderProducts(user.uid);
+            });
+
+            renderProducts(user.uid);
+        });
+    </script>
+</body>
+</html>
