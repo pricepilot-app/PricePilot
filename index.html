@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PricePilot</title>
+    <meta name="description"
+        content="Stop guessing your listing price. PricePilot uses quadratic demand modeling to surface the exact price that maximizes your margin on every SKU.">
+    <link rel="icon" type="image/png" href="PricePilot.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="marketing-page">
+
+    <div class="grain-overlay"></div>
+
+    <!-- ===== HERO ===== -->
+    <div class="wise-hero-wrapper">
+        <div class="hero-bg-mesh"></div>
+
+        <nav class="site-nav dark-mode-nav" id="site-nav">
+            <a class="nav-brand" href="index.html">PricePilot</a>
+            <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+            <div class="nav-right-group">
+                <div class="nav-links">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About</a>
+                    <a href="hub.html">Products</a>
+                </div>
+                <div class="nav-actions" id="nav-actions">
+                    <a class="btn-link nav-login" href="login.html">Log in</a>
+                    <a class="nav-cta nav-signup" href="login.html">Get started <span
+                            class="btn-arrow">&#8594;</span></a>
+                    <button class="btn-link nav-logout" id="logout-btn" type="button">Log out</button>
+                </div>
+            </div>
+        </nav>
+
+        <header class="wise-hero">
+            <div class="wise-hero-content">
+                <div class="hero-pill">
+                    <span class="hero-pill-badge">New</span>
+                    <span>Confidence scoring is live</span>
+                </div>
+                <h1 class="wise-hero-title">
+                    Stop guessing.<br>
+                    <span class="display">Price smarter.</span>
+                </h1>
+                <p class="wise-hero-subtitle">Log your sales data and let the algorithm surface the exact listing price
+                    that maximizes your margin &mdash; on every SKU you sell.</p>
+                <div class="wise-hero-actions">
+                    <a class="btn-primary btn-acid large-neon" href="login.html">Get started free <span
+                            class="btn-arrow">&#8594;</span></a>
+                    <a class="hero-link" href="#how-it-works">
+                        <span class="hero-link-dot"></span>
+                        See how it works
+                    </a>
+                </div>
+                <div class="hero-trust">
+                    <div class="hero-trust-label">Built for</div>
+                    <div class="hero-trust-items">
+                        <span class="hero-trust-item">Multi-SKU stores</span>
+                        <span class="hero-trust-item">Variable pricing</span>
+                        <span class="hero-trust-item">Real margin data</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="wise-hero-widget-container">
+                <div class="wise-widget-card">
+                    <div class="widget-head-row">
+                        <div class="widget-header">
+                            <span class="pulse-dot"></span> Optimizer preview
+                        </div>
+                    </div>
+
+                    <div class="widget-rows">
+                        <div class="widget-row">
+                            <span class="widget-label">Avg selling price</span>
+                            <span class="widget-val">$38.00</span>
+                        </div>
+                        <div class="widget-row">
+                            <span class="widget-label">Avg unit cost</span>
+                            <span class="widget-val">$22.00</span>
+                        </div>
+                        <div class="widget-row">
+                            <span class="widget-label">Confidence</span>
+                            <span class="widget-val signal">High &#8593;</span>
+                        </div>
+                    </div>
+
+                    <div class="widget-curve-wrap">
+                        <svg viewBox="0 0 220 70" preserveAspectRatio="none"
+                            style="width:100%;height:60px;display:block;">
+                            <defs>
+                                <linearGradient id="heroCurveGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#9FE870" stop-opacity="0.35" />
+                                    <stop offset="100%" stop-color="#9FE870" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <path d="M0,58 C30,50 55,60 85,32 C115,2 155,18 220,10 L220,70 L0,70 Z"
+                                fill="url(#heroCurveGrad)" />
+                            <path d="M0,58 C30,50 55,60 85,32 C115,2 155,18 220,10" fill="none" stroke="#7fc253"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="draw-path" />
+                        </svg>
+                    </div>
+
+                    <div class="widget-optimal-block">
+                        <div class="widget-optimal-row">
+                            <div>
+                                <div class="widget-optimal-label">Optimal price</div>
+                                <div class="widget-optimal-delta">+$4 vs current</div>
+                            </div>
+                            <div class="widget-optimal-value">$42</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <!-- ===== MARQUEE ===== -->
+    <section class="marquee-strip">
+        <div class="marquee-label">The data-driven alternative to</div>
+        <div class="marquee-track">
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>Gut feel pricing</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <line x1="3" y1="9" x2="21" y2="9" />
+                    <line x1="9" y1="21" x2="9" y2="9" />
+                </svg>Excel spreadsheets</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>Competitor watching</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>Copy-paste strategies</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>Reddit advice</span>
+            <!-- duplicated for infinite loop -->
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>Gut feel pricing</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <line x1="3" y1="9" x2="21" y2="9" />
+                    <line x1="9" y1="21" x2="9" y2="9" />
+                </svg>Excel spreadsheets</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>Competitor watching</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>Copy-paste strategies</span>
+            <span class="marquee-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                </svg>Reddit advice</span>
+        </div>
+    </section>
+
+    <!-- ===== PROBLEM ===== -->
+    <section class="problem-section scroll-animate" id="problem">
+        <div class="section-inner">
+            <div class="section-head-centered">
+                <span class="eyebrow">The problem</span>
+                <h2 class="section-h">Pricing is not a guess. <span class="display">It's a curve.</span></h2>
+                <p>Most dropshippers price by intuition. The math says you're leaving money on the table &mdash; here's
+                    exactly why.</p>
+            </div>
+
+            <div class="problem-grid scroll-stagger">
+                <div class="problem-card">
+                    <div class="problem-card-num">01</div>
+                    <h3>Copying competitors doesn't work</h3>
+                    <p>Their supplier costs, ad spend, and conversion rates are different. The price that's optimal for
+                        them isn't optimal for you &mdash; not even close.</p>
+                    <div class="problem-check">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Models your specific numbers
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-card-num">02</div>
+                    <h3>Gut feel leaves money behind</h3>
+                    <p>The relationship between price and demand is a curve, not a line. Human intuition can't locate
+                        the peak &mdash; the algorithm can, in seconds.</p>
+                    <div class="problem-check">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Quadratic demand modeling
+                    </div>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-card-num">03</div>
+                    <h3>Spreadsheets are too slow</h3>
+                    <p>Building a pricing model in Excel takes hours of setup and maintenance. PricePilot does it
+                        automatically as soon as you have 3 entries.</p>
+                    <div class="problem-check">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        Instant recommendation
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features-section scroll-animate">
+        <div class="section-inner">
+            <div class="section-head-centered">
+                <span class="eyebrow">What it does</span>
+                <h2 class="section-h">The math your <span class="display">gut doesn't have.</span></h2>
+                <p>Three things PricePilot actually does, built entirely on your own sales history. No inflated claims.
+                </p>
+            </div>
+
+            <div class="features-grid scroll-stagger">
+                <div class="feature-tile">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    <h3>Demand curve modeling</h3>
+                    <p>Fits a quadratic regression to your (price, units sold) pairs to estimate exactly how demand
+                        shifts when you change your listing price.</p>
+                    <div class="feature-visual">
+                        <svg viewBox="0 0 260 78" style="width:100%;height:70px;display:block;">
+                            <defs>
+                                <linearGradient id="f1grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#9FE870" stop-opacity="0.25" />
+                                    <stop offset="100%" stop-color="#9FE870" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <line x1="18" y1="6" x2="18" y2="66" stroke="rgba(15,32,0,0.12)" stroke-width="1" />
+                            <line x1="18" y1="66" x2="248" y2="66" stroke="rgba(15,32,0,0.12)" stroke-width="1" />
+                            <line x1="18" y1="44" x2="248" y2="44" stroke="rgba(15,32,0,0.07)" stroke-width="1"
+                                stroke-dasharray="3,3" />
+                            <line x1="18" y1="26" x2="248" y2="26" stroke="rgba(15,32,0,0.07)" stroke-width="1"
+                                stroke-dasharray="3,3" />
+                            <path d="M22,12 C55,9 95,17 135,36 C175,56 215,64 246,66 L246,66 L22,66 Z"
+                                fill="url(#f1grad)" />
+                            <path d="M22,12 C55,9 95,17 135,36 C175,56 215,64 246,66" fill="none" stroke="#7fc253"
+                                stroke-width="2" stroke-linecap="round" class="ft-draw-path" />
+                            <text x="22" y="74" font-size="8" fill="rgba(15,32,0,0.5)">low price</text>
+                            <text x="200" y="74" font-size="8" fill="rgba(15,32,0,0.5)">high price</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="feature-tile">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                    </div>
+                    <h3>Confidence scoring</h3>
+                    <p>Every recommendation ships with a Low / Medium / High signal calculated from Pearson correlation
+                        &mdash; so you know when to trust it.</p>
+                    <div class="feature-visual conf-visual">
+                        <div class="conf-row"><span class="conf-label">Low</span>
+                            <div class="conf-track">
+                                <div class="conf-bar conf-low"></div>
+                            </div>
+                        </div>
+                        <div class="conf-row"><span class="conf-label">Medium</span>
+                            <div class="conf-track">
+                                <div class="conf-bar conf-med"></div>
+                            </div>
+                        </div>
+                        <div class="conf-row conf-row-active"><span class="conf-label">High</span>
+                            <div class="conf-track">
+                                <div class="conf-bar conf-high"></div>
+                            </div><span class="conf-check">&#10003;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-tile">
+                    <div class="feature-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <line x1="3" y1="9" x2="21" y2="9" />
+                            <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                    </div>
+                    <h3>Per-SKU tracking</h3>
+                    <p>Each product gets its own independent data history, demand model, and recommendation &mdash; no
+                        bleed between SKUs.</p>
+                    <div class="feature-visual sku-visual">
+                        <div class="sku-row"><span class="sku-dot"></span><span class="sku-name">Blue hoodie</span><span
+                                class="sku-price">$42 <span class="sku-arrow">&#8593;</span></span></div>
+                        <div class="sku-row"><span class="sku-dot"></span><span class="sku-name">Phone case</span><span
+                                class="sku-price">$18 <span class="sku-arrow sku-down">&#8595;</span></span></div>
+                        <div class="sku-row sku-row-dim"><span class="sku-dot sku-dot-dim"></span><span
+                                class="sku-name">Wireless buds</span><span class="sku-price sku-dim">Needs data</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section id="how-it-works" class="workflow-section scroll-animate">
+        <div class="section-inner">
+            <div class="section-head-centered">
+                <span class="eyebrow">Step by step</span>
+                <h2 class="section-h">Raw data to optimal price. <span class="display">In three moves.</span></h2>
+            </div>
+
+            <div class="workflow-grid scroll-stagger">
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                    </div>
+                    <div class="step-num">Step 01</div>
+                    <h3>Log your sales</h3>
+                    <p>Enter total revenue, fulfillment cost, and units sold for each batch. Needs 3 entries at
+                        different prices to start.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    <div class="step-num">Step 02</div>
+                    <h3>Model fits itself</h3>
+                    <p>Quadratic regression builds your demand curve, then sweeps candidate prices to find where (price
+                        &minus; cost) &times; predicted units peaks.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon-wrap">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </div>
+                    <div class="step-num">Step 03</div>
+                    <h3>Get your price</h3>
+                    <p>See the optimal listing price with a confidence score and the fitted model equation. Log more
+                        batches to sharpen accuracy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ALGORITHM DEEP DIVE ===== -->
+    <section id="algorithm" class="algo-section scroll-animate">
+        <div class="section-inner">
+            <div class="section-head-centered">
+                <span class="eyebrow">Under the hood</span>
+                <h2 class="section-h">No black box. <span class="display">Here's the math.</span></h2>
+                <p>We believe in transparent algorithms. This is exactly what PricePilot does to your numbers.</p>
+            </div>
+
+            <div class="algo-grid">
+                <div class="algo-copy">
+                    <h3>Quadratic regression + profit sweep</h3>
+                    <p>Your sales data tells a story. The algorithm reads it, fits a curve, and finds the peak &mdash;
+                        all in the time it takes to refresh a page.</p>
+
+                    <div class="algo-equation">
+                        <span class="eq-var">Q</span>(P) = <span class="eq-var">a</span>P&sup2; + <span
+                            class="eq-var">b</span>P + <span class="eq-var">c</span>
+                    </div>
+
+                    <div class="algo-steps">
+                        <div class="algo-step">
+                            <div class="algo-step-num">1</div>
+                            <div>Derive average price per batch: <code>price = revenue &divide; units</code></div>
+                        </div>
+                        <div class="algo-step">
+                            <div class="algo-step-num">2</div>
+                            <div>Fit a quadratic curve to your <code>(price, units)</code> pairs using ordinary least
+                                squares.</div>
+                        </div>
+                        <div class="algo-step">
+                            <div class="algo-step-num">3</div>
+                            <div>Calculate weighted unit cost: <code>total cost &divide; total units</code>.</div>
+                        </div>
+                        <div class="algo-step">
+                            <div class="algo-step-num">4</div>
+                            <div>Sweep candidate prices across your observed range. At each step compute
+                                <code>(P &minus; cost) &times; Q(P)</code>.
+                            </div>
+                        </div>
+                        <div class="algo-step">
+                            <div class="algo-step-num">5</div>
+                            <div>Take the price that maximizes profit. Score confidence using Pearson correlation.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algo-visual">
+                    <div class="algo-visual-header">
+                        <div class="algo-visual-title">Profit &times; Price</div>
+                        <span class="algo-visual-conf">Confidence: High</span>
+                    </div>
+                    <svg class="algo-chart-svg" viewBox="0 0 440 260" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="algoFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#9FE870" stop-opacity="0.35" />
+                                <stop offset="100%" stop-color="#9FE870" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+
+                        <!-- y grid lines -->
+                        <line x1="50" y1="30" x2="420" y2="30" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <line x1="50" y1="80" x2="420" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <line x1="50" y1="130" x2="420" y2="130" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <line x1="50" y1="180" x2="420" y2="180" stroke="rgba(255,255,255,0.05)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+
+                        <!-- axes -->
+                        <line x1="50" y1="20" x2="50" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+                        <line x1="50" y1="220" x2="420" y2="220" stroke="rgba(255,255,255,0.2)" stroke-width="1" />
+
+                        <!-- y labels -->
+                        <text x="42" y="34" font-size="10" fill="rgba(255,255,255,0.4)" text-anchor="end"
+                            font-family="JetBrains Mono">$500</text>
+                        <text x="42" y="84" font-size="10" fill="rgba(255,255,255,0.4)" text-anchor="end"
+                            font-family="JetBrains Mono">$400</text>
+                        <text x="42" y="134" font-size="10" fill="rgba(255,255,255,0.4)" text-anchor="end"
+                            font-family="JetBrains Mono">$300</text>
+                        <text x="42" y="184" font-size="10" fill="rgba(255,255,255,0.4)" text-anchor="end"
+                            font-family="JetBrains Mono">$200</text>
+
+                        <!-- x labels -->
+                        <text x="70" y="240" font-size="10" fill="rgba(255,255,255,0.4)"
+                            font-family="JetBrains Mono">$30</text>
+                        <text x="160" y="240" font-size="10" fill="rgba(255,255,255,0.4)"
+                            font-family="JetBrains Mono">$36</text>
+                        <text x="245" y="240" font-size="10" fill="rgba(255,255,255,0.4)"
+                            font-family="JetBrains Mono">$42</text>
+                        <text x="330" y="240" font-size="10" fill="rgba(255,255,255,0.4)"
+                            font-family="JetBrains Mono">$48</text>
+                        <text x="405" y="240" font-size="10" fill="rgba(255,255,255,0.4)"
+                            font-family="JetBrains Mono">$54</text>
+
+                        <!-- profit curve fill -->
+                        <path d="M60,195 C110,175 160,110 250,55 C330,95 380,170 420,200 L420,220 L60,220 Z"
+                            fill="url(#algoFill)" />
+
+                        <!-- profit curve line -->
+                        <path d="M60,195 C110,175 160,110 250,55 C330,95 380,170 420,200" fill="none"
+                            stroke="rgba(255,255,255,0.55)" stroke-width="2" stroke-linecap="round" />
+
+                        <!-- data points (scatter) -->
+                        <circle cx="90" cy="175" r="4" fill="#9FE870" />
+                        <circle cx="160" cy="115" r="4" fill="#9FE870" />
+                        <circle cx="220" cy="78" r="4" fill="#9FE870" />
+                        <circle cx="300" cy="88" r="4" fill="#9FE870" />
+                        <circle cx="370" cy="160" r="4" fill="#9FE870" />
+
+                        <!-- optimal point marker -->
+                        <line x1="250" y1="55" x2="250" y2="220" stroke="rgba(159,232,112,0.4)" stroke-width="1"
+                            stroke-dasharray="4,4" />
+                        <circle cx="250" cy="55" r="7" fill="#f5efd8" stroke="#9FE870" stroke-width="3" />
+
+                        <!-- optimal callout -->
+                        <rect x="260" y="25" width="120" height="34" rx="8" fill="#9FE870" />
+                        <text x="320" y="42" font-size="11" fill="#0f2000" text-anchor="middle" font-weight="700"
+                            font-family="Inter">Optimal: $42</text>
+                        <text x="320" y="54" font-size="9" fill="#0f2000" opacity="0.7" text-anchor="middle"
+                            font-family="JetBrains Mono">max profit: $478</text>
+                    </svg>
+
+                    <div class="algo-visual-legend">
+                        <div class="algo-legend-item"><span class="algo-legend-dot legend-data"></span>Your data</div>
+                        <div class="algo-legend-item"><span class="algo-legend-dot legend-curve"></span>Fitted curve
+                        </div>
+                        <div class="algo-legend-item"><span class="algo-legend-dot legend-optimal"></span>Optimal point
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SPLIT NARRATIVE ===== -->
+    <section class="split-narrative scroll-animate">
+        <div class="split-narrative-content">
+            <div class="split-left">
+                <span class="eyebrow">Inside the optimizer</span>
+                <h2>Three inputs.<br><span class="display">One optimal price.</span></h2>
+                <p>Revenue. Fulfillment cost. Units sold. That's all you enter. Once you have 3 batches at different
+                    price points, the model fits automatically and surfaces your recommendation with a confidence
+                    rating.</p>
+                <div class="split-feature-list">
+                    <div class="split-feature-item">
+                        <span class="split-feature-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="4">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></span>
+                        Free - No credit card
+                    </div>
+                    <div class="split-feature-item">
+                        <span class="split-feature-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="4">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></span>
+                        Stored in Google Firebase
+                    </div>
+                    <div class="split-feature-item">
+                        <span class="split-feature-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="4">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg></span>
+                        Unlimited products per account
+                    </div>
+                </div>
+                <a class="btn-primary btn-acid split-cta" href="login.html">Start optimizing <span
+                        class="btn-arrow">&#8594;</span></a>
+            </div>
+            <div class="split-right">
+                <div class="mock-dashboard-window">
+                    <div class="mock-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        <span class="mock-title-bar">PricePilot &mdash; Price Optimizer</span>
+                    </div>
+                    <div class="mock-body">
+                        <div class="mock-sku-line">
+                            <div class="mock-param-row"><span>Avg selling price</span><span>$38.00</span></div>
+                            <div class="mock-param-row"><span>Avg daily units</span><span>28</span></div>
+                            <div class="mock-param-row"><span>Avg unit cost</span><span>$22.00</span></div>
+                            <div class="mock-param-row profit-row"><span>Avg daily
+                                    profit</span><span>$448.00</span></div>
+                        </div>
+                        <div class="mock-optimal-row">
+                            <span class="mock-optimal-label">Optimal price</span>
+                            <span class="mock-optimal-value">$42.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== QUOTE ===== -->
+    <section class="quote-section scroll-animate">
+        <div class="section-inner">
+            <div class="quote-card">
+                <div class="quote-mark">&ldquo;</div>
+                <div class="quote-text">I built PricePilot because I kept seeing dropshippers leave money on the table.
+                    The math to fix it already exists &mdash; I just made it accessible.</div>
+                <div class="quote-author">
+                    <span class="quote-author-name">Yash</span>
+                    <span class="quote-author-role">Creator, PricePilot</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section id="faq" class="faq-section scroll-animate">
+        <div class="section-inner">
+            <div class="section-head-centered">
+                <span class="eyebrow">Questions</span>
+                <h2 class="section-h">Straight answers. <span class="display">No fluff.</span></h2>
+            </div>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary>How much data do I need before it works?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">At least 3 entries where your selling price varied across batches
+                        <em>and</em>
+                        at least 15 total units sold across those entries. More price variation improves the demand
+                        curve fit &mdash; and raises the confidence score. If you've always sold at the same price, the
+                        model can't work.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>What exactly do I enter?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Three numbers per batch: total revenue earned, total fulfillment cost paid,
+                        and how many units you sold. The app derives your average selling price and weighted unit cost
+                        automatically.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>What does the confidence score mean?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">It's based on the Pearson correlation between your price and quantity data.
+                        High means the signal in your data is strong and the recommendation is reliable. Low means the
+                        data is noisy or flat &mdash; add more entries before acting on the recommendation.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I track multiple products?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Yes. Create a separate product in the hub for each SKU. Each one gets an
+                        independent data history, demand model, and recommendation. No data bleeds between products.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary>Does the optimizer account for my costs?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Yes. The optimization sweeps candidate prices using (price &minus; weighted
+                        average unit cost) &times; predicted demand, so you're maximizing profit margin, not just
+                        revenue.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Where is my data stored?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Everything is stored securely in Google Firebase. Your data is private,
+                        encrypted, and accessible only by you across any device.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>Is it really free?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Yes, completely free. Sign up with email or Google &mdash; no credit card,
+                        no trial period, no catch.</div>
+                </details>
+                <details class="faq-item">
+                    <summary>What are the model's limitations?<span class="faq-plus"></span></summary>
+                    <div class="faq-answer">Three main ones: it needs price variation in your entries, it only operates
+                        within the price range you've actually tested, and the recommendation is clamped to a safety
+                        band (mean &plusmn; 2 standard deviations)
+                        of your average to prevent wild swings. Full transparency here matters.</div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-banner scroll-animate">
+        <div class="cta-banner-inner">
+            <h2>Your next listing price<br>should be a <span class="display">calculation,</span><br>not a guess.</h2>
+            <p>Sign up free. Add 3 sales entries. Get your first recommendation in under 2 minutes.</p>
+            <div class="cta-banner-actions">
+                <a class="btn-primary btn-acid large-neon" href="login.html">Get started free <span
+                        class="btn-arrow">&#8594;</span></a>
+                <a class="btn-ghost-dark" href="about.html">About the project</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand-col">
+                <div class="footer-brand">PricePilot</div>
+                <p>Data-driven pricing intelligence for dropshippers. No guesswork, no spreadsheets &mdash; just better
+                    margins.</p>
+                <a class="btn-primary btn-acid" style="width:auto;padding:11px 22px;font-size:0.88rem;"
+                    href="login.html">Get started <span class="btn-arrow">&#8594;</span></a>
+            </div>
+            <div class="footer-col">
+                <h5>Product</h5>
+                <a href="#how-it-works">How it works</a>
+                <a href="#algorithm">The math</a>
+                <a href="#faq">FAQ</a>
+                <a href="login.html">Get started</a>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="copyright">&copy; 2026 PricePilot. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script type="module" src="./nav-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu
+            const menuBtn = document.getElementById('mobile-menu-toggle');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('menu-open');
+                    const open = document.body.classList.contains('menu-open');
+                    menuBtn.innerHTML = open
+                        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+                        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+                });
+            }
+
+            // Nav scroll state
+            const nav = document.getElementById('site-nav');
+            const updateNav = () => {
+                if (window.scrollY > 40) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            };
+            window.addEventListener('scroll', updateNav, { passive: true });
+            updateNav();
+
+            // Magnetic button effect
+            document.querySelectorAll('.btn-primary').forEach(btn => {
+                btn.addEventListener('mousemove', e => {
+                    const r = btn.getBoundingClientRect();
+                    const mx = ((e.clientX - r.left) / r.width) * 100;
+                    const my = ((e.clientY - r.top) / r.height) * 100;
+                    btn.style.setProperty('--mx', mx + '%');
+                    btn.style.setProperty('--my', my + '%');
+                });
+            });
+        });
+
+        // Scroll reveals
+        const revealObs = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    setTimeout(() => e.target.classList.add('visible'), 40);
+                    obs.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+            document.querySelectorAll('.scroll-animate, .scroll-stagger').forEach(t => revealObs.observe(t));
+        }));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PricePilot</title>
+    <link rel="icon" type="image/png" href="PricePilot.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="marketing-page">
+    <div class="grain-overlay"></div>
+
+    <nav class="site-nav dark-mode-nav" id="site-nav">
+        <a class="nav-brand" href="index.html">PricePilot</a>
+        <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Toggle Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="nav-right-group">
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="hub.html">Products</a>
+            </div>
+            <div class="nav-actions" id="nav-actions">
+                <a class="btn-link nav-login" href="login.html">Log in</a>
+                <a class="nav-cta nav-signup" href="login.html">Get started <span class="btn-arrow">&#8594;</span></a>
+                <button class="btn-link nav-logout" id="logout-btn" type="button">Log out</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="about-hero-wrapper">
+        <div class="about-hero-inner">
+            <span class="eyebrow">About the project</span>
+            <h1>Built by an independent creator who wanted to solve a real problem.</h1>
+            <p>PricePilot started as a question: why are dropshippers still guessing their listing price? This is the answer.</p>
+        </div>
+    </div>
+
+    <div class="about-body">
+        <div class="about-body-inner">
+            <p>My name is <strong>Yash</strong>. I built PricePilot because I kept seeing the same problem: dropshippers copying competitors' prices, adjusting by gut feel, and never really knowing if they were leaving margin on the table or pricing themselves out of sales.</p>
+
+            <p>The insight is simple: <strong>the relationship between price and demand isn't linear.</strong> It's a curve. If you price too low, you sell more but earn less per unit. If you price too high, volume collapses. Somewhere in the middle is a point where <em>(price &minus; cost) &times; units sold</em> is maximized. That's the optimal price &mdash; and finding it requires math, not intuition.</p>
+
+            <p>PricePilot fits a <strong>quadratic regression model</strong> to your own (price, units sold) pairs to estimate your demand curve, then sweeps candidate prices across your observed range to find the peak. Every recommendation comes with a confidence score based on how strong the signal in your data is, so you always know when to trust it and when to log more batches first.</p>
+
+            <p>Your data is stored securely in Google Firebase. This ensures your sales history is private, encrypted, and available across any device you use to sign in.</p>
+
+            <p>This is still early. The model has real limitations: it needs price variation across your entries to work well, it only operates within your observed price range, and the recommendation is clamped to a safety band based on your observed prices (mean &plusmn; 2 standard deviations) to avoid wild swings. I'm being upfront about all of that because I'd rather you use it knowing exactly what it is than be misled by inflated claims.</p>
+
+            <p>If this ends up helping even a few people price smarter, that's the whole point.</p>
+
+            <div class="about-tech-grid">
+                <div class="about-tech-item">
+                    <h4>Algorithm</h4>
+                    <p>Quadratic regression via 3&times;3 determinant. Pearson correlation for confidence scoring.</p>
+                </div>
+                <div class="about-tech-item">
+                    <h4>Stack</h4>
+                    <p>Vanilla HTML, CSS, JavaScript. Zero frameworks. Chart.js for visualizations.</p>
+                </div>
+                <div class="about-tech-item">
+                    <h4>Auth</h4>
+                    <p>Firebase Authentication for Google sign-in and email/password accounts.</p>
+                </div>
+            </div>
+
+            <div class="about-signature">&mdash; Yash, 2026</div>
+        </div>
+    </div>
+
+    <section class="cta-banner">
+        <div class="cta-banner-inner">
+            <h2>Try it <span class="display">yourself.</span></h2>
+            <p>Free to use. Takes under 2 minutes to get your first recommendation.</p>
+            <div class="cta-banner-actions">
+                <a class="btn-primary btn-acid large-neon" href="login.html">Get started free <span class="btn-arrow">&#8594;</span></a>
+                <a class="btn-ghost-dark" href="index.html">Back to home</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-grid">
+            <div class="footer-brand-col">
+                <div class="footer-brand">PricePilot</div>
+                <p>Data-driven pricing intelligence for dropshippers. No guesswork, no spreadsheets &mdash; just better margins.</p>
+                <a class="btn-primary btn-acid" style="width:auto;padding:11px 22px;font-size:0.88rem;" href="login.html">Get started <span class="btn-arrow">&#8594;</span></a>
+            </div>
+            <div class="footer-col">
+                <h5>Product</h5>
+                <a href="#how-it-works">How it works</a>
+                <a href="#algorithm">The math</a>
+                <a href="#faq">FAQ</a>
+                <a href="login.html">Get started</a>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <a href="about.html">About</a>
+            </div>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span class="copyright">&copy; 2026 PricePilot. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script type="module" src="./nav-auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nav = document.getElementById('site-nav');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) nav.classList.add('scrolled');
+                else nav.classList.remove('scrolled');
+            }, { passive: true });
+
+            const menuBtn = document.getElementById('mobile-menu-toggle');
+            if (menuBtn) {
+                menuBtn.addEventListener('click', () => {
+                    document.body.classList.toggle('menu-open');
+                    const open = document.body.classList.contains('menu-open');
+                    menuBtn.innerHTML = open
+                        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
+                        : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
